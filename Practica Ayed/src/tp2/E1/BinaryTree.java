@@ -5,6 +5,8 @@ package tp2.E1;
 
 
 
+import java.util.ArrayList;
+
 import tp1.E8.Queue;
 
 public class BinaryTree <T> {
@@ -92,9 +94,6 @@ public class BinaryTree <T> {
 	}
 
 
-		
-		
-    	 
     public BinaryTree<T> espejo(){
     	BinaryTree<T> arbEspejo = new BinaryTree<T>(this.getData());
     	if(this.hasLeftChild()) {
@@ -127,36 +126,65 @@ public class BinaryTree <T> {
 		}
 	}
 
+	// Cant Nodos por nivel
+	public ArrayList<Integer> CantNodosPorNivel(){	
+		Queue<BinaryTree<T>> cola = new Queue<BinaryTree<T>>();
+		BinaryTree<T> abTemp = null;
+		ArrayList<Integer> lista = new ArrayList<>();
+		
+		lista.add(0);
+		int nivel = 0;      // Inicializo el primer nivel de la lista en 0.
+
+		cola.enqueue(this);
+		cola.enqueue(null);
+
+		while (!cola.isEmpty()){
+			abTemp = cola.dequeue();
+			if(abTemp != null){
+	
+				lista.set(nivel, lista.get(nivel) + 1);    // Sumo 1 a la posicion.
+
+				if(abTemp.hasLeftChild()) cola.enqueue(abTemp.getLeftChild());    // Pregunto por los hijos del nodo.
+				if(abTemp.hasRightChild()) cola.enqueue(abTemp.getRightChild());
+			}
+			else{
+				if (!cola.isEmpty()){
+					cola.enqueue(null);
+					nivel++;					// Aumento en 1 el nivel
+					lista.add(0); 			// Inicializo nuevo nivel en 0
+
+				}
+			}
+		}
+		return lista;
+	}
+
 
 	// CountLevels
 	public int CountLevels(){
-		if(this.isEmpty()){        // Si el arbol esta vacio retorno 0
-			return 0;
+           
+		Queue<BinaryTree<T>> cola = new Queue<BinaryTree<T>>();
+		BinaryTree<T> abTemp = null;
+		int cant= 0;
+		cola.enqueue(this);
+		cola.enqueue(null);
+		while (!cola.isEmpty()){
+			abTemp = cola.dequeue();
+			if(abTemp != null ) {
+				//System.out.println(abTemp.getData());
+				if(abTemp.hasLeftChild()){
+					cola.enqueue(abTemp.getLeftChild());
+				}
+				if(abTemp.hasRightChild()){
+					cola.enqueue(abTemp.getRightChild());
+				}
+			}
+			else if (!cola.isEmpty()){
+				cola.enqueue(null);
+				cant++;
+			}
 		}
-		else{                      // sino ya se que tengo una raiz, sumo 1
-			Queue<BinaryTree<T>> cola = new Queue<BinaryTree<T>>();
-			BinaryTree<T> abTemp = null;
-			int cant= 1;
-			cola.enqueue(this);
-			cola.enqueue(null);
-			while (!cola.isEmpty()){
-				abTemp = cola.dequeue();
-				if(abTemp != null ) {
-					//System.out.println(abTemp.getData());
-					if(abTemp.hasLeftChild()){
-						cola.enqueue(abTemp.getLeftChild());
-					}
-					if(abTemp.hasRightChild()){
-						cola.enqueue(abTemp.getRightChild());
-					}
-				}
-				else if (!cola.isEmpty()){
-					cola.enqueue(null);
-					cant++;
-				}
-			}
-			return cant;
-			}
+		return cant;
 	}
 
 
@@ -194,6 +222,12 @@ public class BinaryTree <T> {
         if(this.hasLeftChild()) this.getLeftChild().imprimirInorden();
         System.out.println(this.getData());
         if(this.hasRightChild()) this.getRightChild().imprimirInorden();
+    }
+
+	public void imprimirPostOrden() {
+        if(this.hasLeftChild()) this.getLeftChild().imprimirPostOrden();
+        if(this.hasRightChild()) this.getRightChild().imprimirPostOrden();
+		System.out.println(this.getData());
     }
 
 }
