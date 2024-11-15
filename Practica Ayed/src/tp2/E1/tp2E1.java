@@ -33,7 +33,7 @@ public class tp2E1 {
 
 		//ab.porNiveles();
 
-		System.out.println(ab.CantNodosPorNivel());
+		System.out.println(ab.CantNodosPorNivel(0));
 		
 
 	}

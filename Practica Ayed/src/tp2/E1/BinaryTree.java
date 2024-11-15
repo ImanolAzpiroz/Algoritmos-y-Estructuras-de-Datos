@@ -105,6 +105,10 @@ public class BinaryTree <T> {
  	   return arbEspejo;
     }
 
+
+
+
+
     // Por niveles
    	public void ImprimirPorNiveles(){
 		Queue<BinaryTree<T>> cola = new Queue<>();
@@ -159,8 +163,39 @@ public class BinaryTree <T> {
 		return lista;
 	}
 
+	// Cuantos nodos hay en el nivel k
+	public int CantNodosPorNivel(int k){
+		Queue<BinaryTree<T>> cola = new Queue<BinaryTree<T>>();
+		BinaryTree<T> abTemp = null;
+		int cant = 0;
+		int nivel = 0;
 
-	// CountLevels
+		cola.enqueue(this);
+		cola.enqueue(null);
+
+		while(!cola.isEmpty()){
+			abTemp = cola.dequeue();
+			if (abTemp != null){
+				System.out.println(abTemp.getData());
+				if(nivel == k){
+					cant++;
+				}
+				
+				if(abTemp.hasLeftChild()) cola.enqueue(abTemp.getLeftChild());    // Pregunto por los hijos del nodo.
+				if(abTemp.hasRightChild()) cola.enqueue(abTemp.getRightChild());
+
+			}
+			else if(!cola.isEmpty()){
+				cola.enqueue(null);
+				nivel++;
+			}
+			if(nivel > k) break;
+		}
+		return cant;
+	}
+
+
+	// Cantidad de niveles
 	public int CountLevels(){
            
 		Queue<BinaryTree<T>> cola = new Queue<BinaryTree<T>>();
@@ -186,6 +221,10 @@ public class BinaryTree <T> {
 		}
 		return cant;
 	}
+
+
+
+
 
 
 	// a) contarHojas():int Devuelve la cantidad de árbol/subárbol hojas del árbol receptor.
