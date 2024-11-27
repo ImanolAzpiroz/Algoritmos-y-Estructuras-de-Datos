@@ -8,29 +8,27 @@
 
 
 ### Por niveles basico
-``` java
+```java
     // Por niveles
    	public void ImprimirPorNiveles(){
-        if(this.isEmpty()){return}
-        else{
-            Queue<BinaryTree<T>> cola = new Queue<>();
-            BinaryTree<T> abTemp = new BinaryTree<>();
-            cola.enqueue(this);
+		Queue<BinaryTree<T>> cola = new Queue<>();
+		BinaryTree<T> abTemp = new BinaryTree<>();
+		cola.enqueue(this);
 
-            while(!cola.isEmpty()){
-                abTemp = cola.dequeue();
-                if(abTemp != null){
-                    System.out.println(abTemp.data);
-                }
-                if(abTemp.hasLeftChild()){
-                    cola.enqueue(abTemp.getLeftChild());
-                }
-                if(abTemp.hasRightChild()){
-                    cola.enqueue(abTemp.getRightChild());
-                }
-            }
+		while(!cola.isEmpty()){
+		    abTemp = cola.dequeue();
+			if(abTemp != null){
+				System.out.println(abTemp.data);
+			}
+			if(abTemp.hasLeftChild()){
+				cola.enqueue(abTemp.getLeftChild());
+			}
+			if(abTemp.hasRightChild()){
+				cola.enqueue(abTemp.getRightChild());
+			}
+		}
 
-        }
+	
 	}
 ```
 
