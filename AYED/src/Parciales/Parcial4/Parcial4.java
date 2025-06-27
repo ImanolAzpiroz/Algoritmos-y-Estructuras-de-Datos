@@ -6,19 +6,20 @@ public class Parcial4 {
     
     BinaryTree<Integer> ab;
 
+
     private boolean esImpar(int n){
         return ((n % 2) == 1);
     }
 
-    private Integer recorrer(BinaryTree<Integer> ab, int limite){
+    public Integer sumaImparesPosOrderMayorA(BinaryTree<Integer> ab, int limite){
         if(ab.isEmpty()) return 0;
         int suma = 0;
 
         if(ab.hasLeftChild()){
-            suma+= recorrer(ab.getLeftChild(), limite);
+            suma+= sumaImparesPosOrderMayorA(ab.getLeftChild(), limite);
         }
         if(ab.hasRightChild()){
-            suma+= recorrer(ab.getRightChild(), limite);
+            suma+= sumaImparesPosOrderMayorA(ab.getRightChild(), limite);
         }
 
         if (esImpar(ab.getData()) && (ab.getData() > limite)){
@@ -29,17 +30,12 @@ public class Parcial4 {
     }
 
 
-    public Integer sumaImparesPosOrderMayorA(BinaryTree<Integer> ab, int limite){
-        Integer cant = recorrer(ab, limite);
-        return cant;
-    }
 
 
 
     public static void main(String[] args) {
 
-        // Declaración de todos los nodos con sus datos correctos de la imagen.
-        // Nombres de variables numerados de node1 a node15.
+
         BinaryTree<Integer> node1 = new BinaryTree<>(7);
         BinaryTree<Integer> node2 = new BinaryTree<>(56);
         BinaryTree<Integer> node3 = new BinaryTree<>(25);
@@ -58,10 +54,6 @@ public class Parcial4 {
         BinaryTree<Integer> node16 = new BinaryTree<>(10);
 
 
-        // Conexión de los nodos utilizando addLeftChild y addRightChild.
-        // Empezamos desde la raíz y vamos construyendo hacia abajo, o desde las hojas hacia arriba.
-        // Lo haré de arriba hacia abajo, ya que los nodos ya están declarados.
-
         node1.addLeftChild(node2);
         node1.addRightChild(node3);
 
@@ -74,15 +66,15 @@ public class Parcial4 {
         node4.addLeftChild(node8);
         node4.addRightChild(node9);
 
-        node5.addRightChild(node10); // node5 (31) no tiene hijo izquierdo
+        node5.addRightChild(node10); 
 
-        node9.addRightChild(node11); // node9 (77) no tiene hijo izquierdo
+        node9.addRightChild(node11); 
 
-        node10.addRightChild(node12); // node10 (94) no tiene hijo izquierdo
+        node10.addRightChild(node12); 
 
-        node11.addRightChild(node13); // node11 (16) no tiene hijo izquierdo
+        node11.addRightChild(node13); 
 
-        node12.addLeftChild(node14); // node12 (2) no tiene hijo derecho
+        node12.addLeftChild(node14);
 
         node13.addLeftChild(node15);
         node13.addRightChild(node16);
