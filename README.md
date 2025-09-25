@@ -4,7 +4,7 @@ Apuntes, teoría, practica de la materia.
 
 Practica
 
-- [TP1 - Listas](/Practica/AYED/src/tp1/)
+- [TP1 - Listas](/Practica/AYED/src/tp1/TP1.md)
 - TP2 - Arboles Binarios
 - TP3 - Arboles Generales
 - TP4 - TDE
