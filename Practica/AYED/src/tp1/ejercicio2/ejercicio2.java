@@ -23,5 +23,7 @@ public class ejercicio2 {
             System.out.println(Arrays.toString(arregloDeMultiplos(n)));
             n = s.nextInt();
         }
+
+        s.close();
     }
 }
